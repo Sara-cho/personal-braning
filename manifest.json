@@ -1,0 +1,16 @@
+{
+  "name": "WD Wave 퍼스널브랜딩",
+  "short_name": "WD Wave 퍼스널브랜딩",
+  "description": "1인 퍼스널 브랜딩 · WD WAVE",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#2b1a52",
+  "theme_color": "#4A3F7A",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
