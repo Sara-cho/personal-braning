@@ -155,6 +155,7 @@ header.nav.solid .hamb span{background:var(--ink)}
 .hero-actions{display:flex;gap:16px;margin-top:42px;flex-wrap:wrap}
 .scroll-hint{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.6);font-family:'Pretendard',sans-serif;font-style:normal;font-size:.92rem;letter-spacing:.05em;display:flex;flex-direction:column;align-items:center;gap:8px}
 .scroll-hint .line{width:1px;height:38px;background:linear-gradient(rgba(255,255,255,.6),transparent);animation:drop 2s infinite}
+@media(max-width:760px){.scroll-hint{display:none}}
 @keyframes drop{0%{opacity:0;transform:scaleY(.4)}50%{opacity:1}100%{opacity:0;transform:scaleY(1)}}
 
 /* ===== marquee strip ===== */
@@ -358,6 +359,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:64px 0 40px}
   .nav-links,.nav-cta{display:none}
   .hamb{display:flex}
   .thesis .wrap,.about-intro .wrap,.loc .wrap,.contact .wrap{grid-template-columns:1fr;gap:40px}
+  .loc .loc-info{order:-1}
   .thesis-side{padding-top:0}
   .svc-grid{grid-template-columns:1fr}
   .need-grid{grid-template-columns:1fr}
@@ -493,7 +495,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:64px 0 40px}
         </div>
       </div>
       <div class="need-foot">
-        <p><span class="nb">한 가지라도 해당된다면,</span><br><b><span class="nb">WD WAVE가 여러분과 처음부터 끝까지 동행합니다.</span></b></p>
+        <p><span class="nb">한 가지라도 해당된다면,</span><br><b><span class="nb">WD WAVE가</span> <span class="nb">여러분과 처음부터 끝까지 동행합니다.</span></b></p>
       </div>
     </div>
   </div>
@@ -538,12 +540,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:64px 0 40px}
   <div class="band">
     <div class="wrap">
       <div class="eyebrow">Why WD WAVE</div>
-      <h2 class="h-sec">28년의 판단력은,<br>한 번의 디자인으로 흉내 낼 수 없습니다.</h2>
-      <p><span class="nb">도구는 누구에게나 평준화됐습니다.</span> <span class="nb">남는 차이는 사람을 읽는 눈과 기준입니다.</span> <span class="nb">WD WAVE는 오래 쌓은 판단력을 당신의 브랜드 구조에 새겨 넣습니다.</span></p>
+      <h2 class="h-sec">28년의 경험은,<br>가장 빠른 길을 안내해 드립니다.</h2>
+      <p><span class="nb">도구는 누구에게나 평준화됐습니다.</span> <span class="nb">남는 차이는 사람을 읽는 눈과 쌓아온 경험입니다.</span> <span class="nb">WD WAVE는 28년의 경험으로,</span> <span class="nb">당신이 돌아가지 않을 가장 빠른 길을 안내합니다.</span></p>
       <div class="band-stats">
         <div class="bstat">
           <b>28<span class="u">년</span></b>
-          <span><span class="nb">금융·상담 현장에서 쌓은 판단력</span></span>
+          <span><span class="nb">금융·상담 현장에서 쌓은 경험</span></span>
         </div>
         <div class="bstat">
           <b>1:1</b>
@@ -572,8 +574,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:64px 0 40px}
   <div class="page-hero">
     <div class="wrap">
       <span class="eng">Personal Branding</span>
-      <h2>당신을 읽고, 구조로 바꿉니다.</h2>
-      <p><span class="nb">WD WAVE의 퍼스널 브랜딩은 이미지 메이킹이 아니라,</span> <span class="nb">한 사람의 경험과 기준을 오래 가는 시스템으로 정리하는 일입니다.</span></p>
+      <h2>개인을 읽고 분석해,<br>브랜드로 구조화해 드립니다.</h2>
+      <p><span class="nb">WD WAVE의 퍼스널 브랜딩은</span> <span class="nb">한 사람의 경험과 기준, 강점을</span> <span class="nb">하나의 시스템으로 구체화하는 일입니다.</span></p>
     </div>
   </div>
 
@@ -604,7 +606,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:64px 0 40px}
   <div class="process">
     <div class="wrap">
       <div class="kicker" style="color:var(--gold-soft)">How it works</div>
-      <h2 class="h-sec">한 사람을 따라 들어가는 <em>하나의 흐름</em></h2>
+      <h2 class="h-sec"><span class="nb">한 사람을 따라 들어가는</span> <em class="nb">하나의 흐름</em></h2>
       <p style="color:rgba(255,255,255,.62);margin:18px 0 44px;max-width:56ch"><span class="nb">서비스를 단품으로 나열하지 않습니다.</span> <span class="nb">단계가 깊어질수록 관여도와 실행 범위가 넓어지고,</span> <span class="nb">파트너십도 함께 깊어집니다.</span></p>
       <div class="proc-grid">
         <div class="proc"><div class="proc-emoji">🔍</div><div class="n">01</div><h4>현황 진단</h4><p>현재 포지션과 보유 자원을 진단합니다.</p></div>
@@ -706,7 +708,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:64px 0 40px}
         <h2 class="h-sec">대화는 언제나<br>편하게 시작하세요.</h2>
         <p><span class="nb">상담은 부담이 아니라 정리의 시작입니다.</span> <span class="nb">작은 질문도 환영합니다.</span></p>
         <div class="ci"><span class="k">Tel</span><span class="v"><a href="tel:01063969896">010-6396-9896</a></span></div>
-        <div class="ci"><span class="k">오시는 길</span><span class="v"><span class="nb">서울특별시 광진구 광나루로37길 21</span> <span class="nb">2층 201호</span></span></div>
       </div>
 
       <div class="form">
