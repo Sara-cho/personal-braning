@@ -248,8 +248,8 @@ const pbSetupToken=new URLSearchParams(location.hash.slice(1)).get('setup');
 if(pbSetupToken){
  history.replaceState(null,'',location.pathname+location.search);
  el('pb-login-form').querySelector('h1').textContent='관리자 비밀번호 설정';
- el('pb-login-form').querySelector('p').textContent='새 비밀번호를 12자 이상 입력해주세요. 본진 비밀번호와 별도로 사용됩니다.';
- el('pb-password').autocomplete='new-password';el('pb-password').minLength=12;
+ el('pb-login-form').querySelector('p').textContent='영문·숫자·느낌표 등을 자유롭게 조합해 6자 이상 입력해주세요. 본진 비밀번호와 별도로 사용됩니다.';
+ el('pb-password').autocomplete='new-password';el('pb-password').minLength=6;
  const confirm=document.createElement('input');confirm.type='password';confirm.id='pb-password-confirm';confirm.placeholder='새 비밀번호 확인';confirm.autocomplete='new-password';confirm.required=true;confirm.setAttribute('aria-label','새 비밀번호 확인');el('pb-password').after(confirm);
  el('pb-login-form').querySelector('button').textContent='비밀번호 저장하고 시작';
 }
