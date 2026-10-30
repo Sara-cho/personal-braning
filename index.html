@@ -2464,6 +2464,17 @@ body>header #navigation>.nav-contact{grid-column:3;justify-self:end;margin-left:
 #pb-blog-dialog.pb-portfolio-dialog figcaption{font-size:13px;color:#766a80;padding-top:10px;}
 @media(max-width:700px){#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-layout{display:block;overflow:auto;overscroll-behavior:contain;}#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info,#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-visual{overflow:visible;padding:22px;}#pb-blog-dialog.pb-portfolio-dialog>header h2{font-size:16px!important;}}
 </style>
+<style id="pb-portfolio-info-refine">
+#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info{background:#f4eff9;color:#393044;padding:32px;border-right:1px solid #e7deef;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-project-category{display:inline-block;color:#806296;font-size:12px;font-weight:600;letter-spacing:.03em;margin-bottom:14px;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info h3{display:block;font-size:14px!important;font-weight:700!important;line-height:1.6;color:#705187!important;margin:0 0 12px!important;padding:0!important;border:0!important;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info .pb-project-lead{font-size:25px!important;line-height:1.5!important;font-weight:700!important;letter-spacing:-.045em;color:#3d2851!important;margin:0!important;word-break:keep-all;overflow-wrap:anywhere;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info p{font-size:15px!important;font-weight:400!important;line-height:1.9!important;color:#554c5d!important;margin:12px 0 0!important;word-break:keep-all;overflow-wrap:anywhere;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-project-section{margin-top:26px;padding-top:24px;border-top:1px solid #ded3e8;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-service-tags{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 16px;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-service-tags span{display:inline-block;padding:7px 10px;border:1px solid #dfd2eb;border-radius:6px;background:#fff;color:#69517e;font-size:12px;line-height:1.5;font-weight:500;}
+@media(max-width:700px){#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info{padding:24px;border-right:0;}#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info .pb-project-lead{font-size:22px!important;}}
+</style>
 </head><body class="v8-home">
 <a class="skip" href="#main">본문 바로가기</a>
 <header><div class="wrap header-inner">
@@ -3107,6 +3118,27 @@ function show(post){
  let images=0;
  for(const block of blocks){if(block.type==='image'){images++;const figure=document.createElement('figure'),img=document.createElement('img');img.alt=block.alt||post.title;img.loading=images===1?'eager':'lazy';figure.append(img);photo(block.src).then(url=>img.src=url).catch(()=>img.replaceWith(text('p','사진을 불러오지 못했습니다.')));if(block.caption)figure.append(text('figcaption',block.caption));visual.append(figure);}else{const value=block.text||(block.runs||[]).map(r=>r.text||'').join('');if(value)info.append(text(block.type==='heading'?'h3':'p',value));}}
  if(!images&&meta.image){const img=document.createElement('img');img.alt=post.title;visual.append(img);photo(meta.image).then(url=>img.src=url).catch(()=>img.replaceWith(text('p','사진을 불러오지 못했습니다.')));}
+
+// Organize only the explanation column; keep every saved paragraph.
+ const descriptionNodes=[...info.children];info.replaceChildren();
+ const intro=document.createElement('div');intro.className='pb-project-intro';
+ intro.append(text('span',post.category||'포트폴리오','pb-project-category'));info.append(intro);
+ let current=intro;
+ const labels={'제공 서비스':'진행한 서비스','서비스 설명':'서비스 소개','업종의 특성':'이 업종에서 중요한 점','업종 특성':'이 업종에서 중요한 점','제작 방향':'이렇게 제작했어요','강조한 방법':'이렇게 제작했어요'};
+ for(const node of descriptionNodes){
+  if(node.tagName==='H3'){
+   const label=node.textContent.trim();
+   if(!labels[label]&&current===intro&&!intro.querySelector('h3')){node.className='pb-project-lead';intro.append(node);continue;}
+   current=document.createElement('div');current.className='pb-project-section';
+   node.textContent=labels[label]||label;current.append(node);info.append(current);
+  }else{
+   const services=(meta.selectedServices||[]).filter(s=>typeof s==='string');
+   if(services.length&&node.textContent.replace(/\s/g,'')===services.join('+').replace(/\s/g,'')){
+    const tags=document.createElement('div');tags.className='pb-service-tags';
+    for(const service of services)tags.append(text('span',service));current.append(tags);
+   }else current.append(node);
+  }
+ }
  layout.append(info,visual);dialog.append(head,layout);
  const trigger=document.activeElement,overflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.onclose=()=>{document.body.style.overflow=overflow;dialog.remove();trigger?.focus({preventScroll:true})};
  dialog.onclick=e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}};
