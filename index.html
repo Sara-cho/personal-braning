@@ -2467,12 +2467,12 @@ body>header #navigation>.nav-contact{grid-column:3;justify-self:end;margin-left:
 <style id="pb-portfolio-info-refine">
 #pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info{background:#f4eff9;color:#393044;padding:32px;border-right:1px solid #e7deef;}
 #pb-blog-dialog.pb-portfolio-dialog .pb-project-category{display:inline-block;color:#806296;font-size:12px;font-weight:600;letter-spacing:.03em;margin-bottom:14px;}
-#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info h3{display:block;font-size:14px!important;font-weight:700!important;line-height:1.6;color:#705187!important;margin:0 0 12px!important;padding:0!important;border:0!important;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info h3{display:block;font-size:20px!important;font-weight:700!important;line-height:1.6;color:#4b236d!important;margin:0 0 12px!important;padding:0!important;border:0!important;}
 #pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info .pb-project-lead{font-size:25px!important;line-height:1.5!important;font-weight:700!important;letter-spacing:-.045em;color:#3d2851!important;margin:0!important;word-break:keep-all;overflow-wrap:anywhere;}
 #pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info p{font-size:15px!important;font-weight:400!important;line-height:1.9!important;color:#554c5d!important;margin:12px 0 0!important;word-break:keep-all;overflow-wrap:anywhere;}
 #pb-blog-dialog.pb-portfolio-dialog .pb-project-section{margin-top:26px;padding-top:24px;border-top:1px solid #ded3e8;}
-#pb-blog-dialog.pb-portfolio-dialog .pb-service-tags{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 16px;}
-#pb-blog-dialog.pb-portfolio-dialog .pb-service-tags span{display:inline-block;padding:7px 10px;border:1px solid #dfd2eb;border-radius:6px;background:#fff;color:#69517e;font-size:12px;line-height:1.5;font-weight:500;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-service-tags{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:4px 0 20px;}
+#pb-blog-dialog.pb-portfolio-dialog .pb-service-tags span{display:block;padding:16px 18px;border:1px solid #e4d8ed;border-radius:10px;background:#fff;color:#4b236d;font-size:16px;line-height:1.6;font-weight:600;box-shadow:0 3px 12px rgba(67,35,91,.04);}
 @media(max-width:700px){#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info{padding:24px;border-right:0;}#pb-blog-dialog.pb-portfolio-dialog .pb-portfolio-info .pb-project-lead{font-size:22px!important;}}
 </style>
 </head><body class="v8-home">
@@ -3132,8 +3132,11 @@ function show(post){
    current=document.createElement('div');current.className='pb-project-section';
    node.textContent=labels[label]||label;current.append(node);info.append(current);
   }else{
-   const services=(meta.selectedServices||[]).filter(s=>typeof s==='string');
-   if(services.length&&node.textContent.replace(/\s/g,'')===services.join('+').replace(/\s/g,'')){
+   const savedServices=(meta.selectedServices||[]).filter(s=>typeof s==='string');
+   const serviceSection=current.querySelector('h3')?.textContent==='진행한 서비스';
+   const firstServiceLine=serviceSection&&!current.querySelector('p,.pb-service-tags');
+   const services=savedServices.length?savedServices:(firstServiceLine?node.textContent.split(/\s*\+\s*/).filter(Boolean):[]);
+   if(firstServiceLine&&services.length&&node.textContent.replace(/\s/g,'')===services.join('+').replace(/\s/g,'')){
     const tags=document.createElement('div');tags.className='pb-service-tags';
     for(const service of services)tags.append(text('span',service));current.append(tags);
    }else current.append(node);
